@@ -53,24 +53,13 @@ def card_ranks(hand):
     return ranks
 
 def straight(ranks):
-    "Return true if the ranks form a straight"
-    minrank = min(ranks)
-    maxrank = max(ranks)
-    mid = (minrank + maxrank) / 2
-    num = len(ranks)
-    avg = (sum(ranks)) / num
-    diff = maxrank - minrank + 1
-    return ((avg == mid) and (diff == num))
+    "Return true if the ordered ranks form a 5-card straight."
+    return (max(ranks) - min(ranks) == 4) and len(set(ranks)) == 5
 
 def flush(hand):
-    "Return true if the suit is same for all cards"
-    firstsuit = hand[0][1:]  # Compare all suits with first card's suit 
-    for card in hand:
-        suit = card[1:]
-        #print suit
-        if suit != firstsuit:
-            return False
-    return True
+    "Return true if the suit is same for all cards."
+    suits = [s for r,s in hand]
+    return len(set(suits)) == 1
         
 def two_pair(ranks):
     "Return true if there are two 2 of a kinds in the ranks"
