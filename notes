@@ -1,0 +1,28 @@
+Notes for Desigh of Computer Programs course in Python from Udacity cs212
+
+
+Define a Poker Program
+
+
+A card has a rank and a suit eg. 3 of Diamonds or 3D
+hand = 5 cards
+hands is a list of hand eg. [hand1, hand2, ..]
+poker(hands) -> hand # function poker returns the best hand
+
+
+Hand rank concept:
+n-kind 22  33  888
+straight 56789
+flush 	 5 diamonds or 5 hearts etc
+
+Order of ranks from highest to lowest:
+8 - Straight and Flush
+7 - Four of a kind
+6 - Full House (3 kinds and 2 kinds)
+5 - Flush
+4 - Straight
+3 - Three of a kind
+2 - Two 2 of a kinds
+1 - Two of a kind
+0 - Nothing
+
