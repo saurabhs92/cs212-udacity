@@ -22,8 +22,20 @@ sf = "6C 7C 8C 9C TC".split() # Straight flush
 fk = "9C 9H 9S 9T 7D".split() # Four of a kind
     
 def poker(hands):
-    "Return the best hand: poker([hand,.. ]) => hand"
-    return max(hands, key=hand_rank)
+    "Return a list of winning hands: poker([hand,...]) => [hand,...]"
+    return allmax(hands, key=hand_rank)
+
+def allmax(iterable, key=None):
+    "Return a list of all items equal to the max of the iterable."
+    result, maxval = [], None
+    key = key or (lambda x: x)  # Use the key passed or use the identity fn
+    for x in iterable:
+        xval = key(x)
+        if not result or xval > maxval:
+            result, maxval = [x], xval
+        elif xval == maxval:
+            result.append(x)
+    return result
 
 def hand_rank(hand):
     "Return a value indicating the rank of a hand."
@@ -52,7 +64,7 @@ def card_ranks(hand):
     "Return a list of ranks in a hand, sorted with higher first."
     ranks = ['--23456789TJQKA'.index(r) for r,s in hand]
     ranks.sort(reverse=True)
-    return ranks
+    return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
 
 def straight(ranks):
     "Return true if the ordered ranks form a 5-card straight."

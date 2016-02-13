@@ -35,4 +35,7 @@ To find no. of unique elements in a list, convert it to a set and then check its
 To create a list from a part of another list, use something like: 
 List1 = [a.some_function() for a,b in List2] 
 
+Combine if statement with return:
+return a if <condition> else b
+
 
