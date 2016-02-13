@@ -1,5 +1,7 @@
 #!bin/python2.7
 
+import random
+
 """
 
 CS212 Udacity Design of computer Programs 
@@ -17,7 +19,7 @@ straight 56789
 flush 	 5 diamonds or 5 hearts etc
 
 """
-#sf = "TC JC QC KC AC".split()
+
 sf = "6C 7C 8C 9C TC".split() # Straight flush
 fk = "9C 9H 9S 9T 7D".split() # Four of a kind
     
@@ -64,6 +66,7 @@ def card_ranks(hand):
     "Return a list of ranks in a hand, sorted with higher first."
     ranks = ['--23456789TJQKA'.index(r) for r,s in hand]
     ranks.sort(reverse=True)
+    # Handle the straight A-5 case
     return [5, 4, 3, 2, 1] if (ranks == [14, 5, 4, 3, 2]) else ranks
 
 def straight(ranks):
@@ -92,7 +95,6 @@ def kind(n, ranks):
         if ranks.count(r) == n: return r
     return None
 
-
 def test():
     "Test cases for testing out all possible combinations"
     sf = "6C 7C 8C 9C TC".split() # Straight flush
@@ -105,26 +107,22 @@ def test():
     assert card_ranks (sf) == [10,  9,  8, 7, 6]
     assert card_ranks (fk) == [ 9,  9,  9, 9, 7]
     assert card_ranks (fh) == [10, 10, 10, 7, 7]
-    """
     # Test the poker function
-    assert poker ([sf, fk, fh]) == sf
-    assert poker ([fk, fh])     == fk
-    assert poker ([fh, fh])     == fh
-    assert poker ([fh])         == fh
-    assert poker ([fh]*100)     == fh
-    """
+    assert poker ([sf, fk, fh]) == [sf]
+    assert poker ([fk, fh])     == [fk]
+    assert poker ([fh, fh])     == [fh, fh]
+    assert poker ([fh])         == [fh]
+    assert poker ([fh]*100)     == [fh]*100
     # Test straight and flush functions
     assert straight ([9,8,7,6,5]) == True
     assert straight ([9,8,6,4,3]) == False
     assert flush (sf)             == True
     assert flush (fk)             == False
-    """
-    # Test the hand_rank function (yet to be fixed) 
+    # Test the hand_rank function 
     assert hand_rank (sf) == (8, 10)
     assert hand_rank (fk) == (7, 9, 7)
     assert hand_rank (fh) == (6, 10, 7)
-    """
-    # Test the kind function
+    # Test the kind and two_pair functions
     assert kind(4, fkranks) == 9
     assert kind(3, fkranks) == None
     assert kind(2, fkranks) == None
