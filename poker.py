@@ -17,8 +17,10 @@ straight 56789
 flush 	 5 diamonds or 5 hearts etc
 
 """
-sf = "TC JC QC KC AC".split()
-
+#sf = "TC JC QC KC AC".split()
+sf = "6C 7C 8C 9C TC".split() # Straight flush
+fk = "9C 9H 9S 9T 7D".split() # Four of a kind
+    
 def poker(hands):
     "Return the best hand: poker([hand,.. ]) => hand"
     return max(hands, key=hand_rank)
@@ -62,10 +64,21 @@ def flush(hand):
     return len(set(suits)) == 1
         
 def two_pair(ranks):
-    "Return true if there are two 2 of a kinds in the ranks"
+    """If there are two pairs, return the two ranks as a tuple:
+    (highest, lowest); otherwise return None."""
+    pair = kind(2, ranks)
+    lowpair = kind(2, list(reversed(ranks)))
+    if pair and lowpair != pair:
+        return (pair, lowpair)
+    else:
+        return None
 
 def kind(n, ranks):
-    "Returns the rank of the card that appears n times in a hand"
+    """Returns the first rank of the card that appears n times in a hand.
+    Return None if there is no n-of-a-kind in the hand."""
+    for r in ranks:
+        if ranks.count(r) == n: return r
+    return None
 
 
 def test():
@@ -73,6 +86,9 @@ def test():
     sf = "6C 7C 8C 9C TC".split() # Straight flush
     fk = "9C 9H 9S 9T 7D".split() # Four of a kind
     fh = "TD TH TC 7C 7D".split() # Full house
+    tp = "5D 5C 8H 8C 6S".split() # Two pair
+    fkranks = card_ranks(fk)
+    tpranks = card_ranks(tp)
     # Test the card_ranks function
     assert card_ranks (sf) == [10,  9,  8, 7, 6]
     assert card_ranks (fk) == [ 9,  9,  9, 9, 7]
@@ -96,9 +112,18 @@ def test():
     assert hand_rank (fk) == (7, 9, 7)
     assert hand_rank (fh) == (6, 10, 7)
     """
+    # Test the kind function
+    assert kind(4, fkranks) == 9
+    assert kind(3, fkranks) == None
+    assert kind(2, fkranks) == None
+    assert kind(1, fkranks) == 7
+    assert two_pair(fkranks) == None
+    assert two_pair(tpranks) == (8, 5)
     return "Tests pass"
 
 print test()
-print sf
-print card_ranks(sf)
-
+print 'Straight flush: ' + str(sf)
+print 'Four of a kind: ' + str(fk)
+print 'Output of card_ranks (sf)  : ' + str(card_ranks(sf))
+print 'Output of poker ([sf, fk]) : ' + str(poker([sf, fk]))
+print 'Output of hand_rank (sf)   : ' + str(hand_rank(sf))

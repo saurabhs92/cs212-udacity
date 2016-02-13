@@ -26,3 +26,13 @@ Order of ranks from highest to lowest:
 1 - Two of a kind
 0 - Nothing
 
+'--23456789TJQKA'.index(r) : Returns a number from 2 to 14 for any rank r.
+
+<List>.count(<element>) : Returns the no. of times the element is present in the list.
+
+To find no. of unique elements in a list, convert it to a set and then check its length : len(set(<List>))
+
+To create a list from a part of another list, use something like: 
+List1 = [a.some_function() for a,b in List2] 
+
+
