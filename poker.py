@@ -20,6 +20,8 @@ flush 	 5 diamonds or 5 hearts etc
 
 """
 
+hand_names = ['High card', '2 kind', '2 pair', '3 kind', 'Straight', 'Flush', 'Full house', '4 kind', 'Straight flush']
+
 sf = "6C 7C 8C 9C TC".split() # Straight flush
 fk = "9C 9H 9S 9T 7D".split() # Four of a kind
     
@@ -88,17 +90,27 @@ def two_pair(ranks):
     else:
         return None
 
-def deal(numhands, n=5, deck=[r+s for r in '23456789TJQKA' for s in 'SCHD']):
-    "Shuffle the deck and deal out numhands no. of hands containing n cards each."
-    random.shuffle(deck)
-    return [deck[n*i : n*(i+1)] for i in range(numhands)]
-
 def kind(n, ranks):
     """Returns the first rank of the card that appears n times in a hand.
     Return None if there is no n-of-a-kind in the hand."""
     for r in ranks:
         if ranks.count(r) == n: return r
     return None
+
+def deal(numhands, n=5, deck=[r+s for r in '23456789TJQKA' for s in 'SCHD']):
+    "Shuffle the deck and deal out numhands no. of hands containing n cards each."
+    random.shuffle(deck)
+    return [deck[n*i : n*(i+1)] for i in range(numhands)]
+
+def hand_percentages(hand_names, n=700000):
+    "Sample n random hands and print out a table of percentages for each type of hand."
+    counts = [0] * 9
+    for i in range(n/10):
+        for hand in deal(10):
+            ranking = hand_rank(hand)[0]
+            counts[ranking] += 1
+    for i in reversed(range(9)):
+        print "%14s: %6.3f %%" % (hand_names[i], 100. * counts[i]/n)
 
 def test():
     "Test cases for testing out all possible combinations"
@@ -143,3 +155,5 @@ print 'Output of card_ranks (sf)  : ' + str(card_ranks(sf))
 print 'Output of poker ([sf, fk]) : ' + str(poker([sf, fk]))
 print 'Output of hand_rank (sf)   : ' + str(hand_rank(sf))
 print 'Deal 2 random hands: ' + str(deal(2))
+print 'Printing hand percentages: ' 
+hand_percentages(hand_names)
