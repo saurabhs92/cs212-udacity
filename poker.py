@@ -88,6 +88,11 @@ def two_pair(ranks):
     else:
         return None
 
+def deal(numhands, n=5, deck=[r+s for r in '23456789TJQKA' for s in 'SCHD']):
+    "Shuffle the deck and deal out numhands no. of hands containing n cards each."
+    random.shuffle(deck)
+    return [deck[n*i : n*(i+1)] for i in range(numhands)]
+
 def kind(n, ranks):
     """Returns the first rank of the card that appears n times in a hand.
     Return None if there is no n-of-a-kind in the hand."""
@@ -137,3 +142,4 @@ print 'Four of a kind: ' + str(fk)
 print 'Output of card_ranks (sf)  : ' + str(card_ranks(sf))
 print 'Output of poker ([sf, fk]) : ' + str(poker([sf, fk]))
 print 'Output of hand_rank (sf)   : ' + str(hand_rank(sf))
+print 'Deal 2 random hands: ' + str(deal(2))
