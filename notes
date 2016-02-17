@@ -39,3 +39,21 @@ Combine if statement with return:
 return a if <condition> else b
 
 
+List comprehensions:
+
+udacity_tas = ['Peter', 'Andy', 'Sarah', 'Job', 'Sean', 'Parker']
+uppercase_tas = [name.upper() for name in udacity_tas]
+
+This is possible for all iterable objects: strings, lists, tuples
+
+
+Multiple values can be unpacked and combined with if statement like below:
+
+ta_data = [('Peter', 'Australia', 'CS101'),
+	  ('Andy', 'Brazil', 'CS212'),
+	  ('Sarah', 'England', 'CS375'),
+	  ('Job', 'Germany', 'CS301'),
+	  ('Sean', 'France', 'CS251'),
+	  ('Parker', 'USA', 'CS153')]
+
+ta_facts = [name + ' from ' + country + ' is the TA for ' + course for name, country, course in ta_data if course.find('CS3') != -1]
