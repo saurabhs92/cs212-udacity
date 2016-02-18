@@ -78,7 +78,19 @@ int as default_factory is useful for counting (like a bag or multiset in other l
 >>> d = defaultdict(int)
 >>> for k in s:
 ...     d[k] += 1
-...
->>> d.items()
+... 
+>>> d.items()	
 [('i', 4), ('p', 2), ('s', 4), ('m', 1)]
 
+
+Functions are of 'computing' type and 'doing' type. 
+Computing fns: sine, sqrt  
+	       Take input and return an output like mathematical fns.
+	       Easier to use and test. Should be preffered.
+	       sorted([3,2,1]) == [1,2,3]
+
+'Doing' type: shuffle()
+	      Modify the input. Takes more code - setup the state, call the subroutine or method, and inspect the state (assert statement)
+	      input = [3,2,1]
+	      input.sort()
+	      input == [1,2,3]
