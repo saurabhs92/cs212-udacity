@@ -184,12 +184,13 @@ def test():
     assert hand_rank (fh) == (6, (10, 7))
     return "Tests pass"
 
-print test()
-print 'Straight flush: ' + str(sf)
-print 'Four of a kind: ' + str(fk)
-# print 'Output of card_ranks (sf)  : ' + str(card_ranks(sf))
-print 'Output of poker ([sf, fk]) : ' + str(poker([sf, fk]))
-print 'Output of hand_rank (sf)   : ' + str(hand_rank(sf))
-print 'Deal 2 random hands: ' + str(deal(2))
-print 'Printing hand percentages: ' 
-hand_percentages(hand_names)
+if __name__ == '__main__':
+    print test()
+    print 'Straight flush: ' + str(sf)
+    print 'Four of a kind: ' + str(fk)
+    # print 'Output of card_ranks (sf)  : ' + str(card_ranks(sf))
+    print 'Output of poker ([sf, fk]) : ' + str(poker([sf, fk]))
+    print 'Output of hand_rank (sf)   : ' + str(hand_rank(sf))
+    print 'Deal 2 random hands: ' + str(deal(2))
+    print 'Printing hand percentages: ' 
+    hand_percentages(hand_names)
