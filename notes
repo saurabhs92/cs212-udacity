@@ -94,3 +94,16 @@ Computing fns: sine, sqrt
 	      input = [3,2,1]
 	      input.sort()
 	      input == [1,2,3]
+
+
+itertools.combinations(iterable, r):
+Returns r length subsequences of elements from the input iterable.
+
+Can be used like:
+return max(itertools.combinations(hand, 5), key=hand_rank)
+
+Examples:
+# combinations('ABCD', 2) --> AB AC AD BC BD CD
+# combinations(range(4), 3) --> 012 013 023 123
+
+
