@@ -106,4 +106,31 @@ Examples:
 # combinations('ABCD', 2) --> AB AC AD BC BD CD
 # combinations(range(4), 3) --> 012 013 023 123
 
+---
+
+itertools.product :
+
+Cartesian product of input iterables.
+
+E.g.:
+>>> list(itertools.product('ABCD', 'xy'))
+[('A', 'x'), ('A', 'y'), ('B', 'x'), ('B', 'y'), ('C', 'x'), ('C', 'y'), ('D', 'x'), ('D', 'y')]
+
+Applies to any iterable:
+>>> list(itertools.product(['A', 'B', 'C'], ['x'], ['z','w']))
+[('A', 'x', 'z'), ('A', 'x', 'w'), ('B', 'x', 'z'), ('B', 'x', 'w'), ('C', 'x', 'z'), ('C', 'x', 'w')]
+
+Use repeat to specify if additonal 
+>>> list(itertools.product('ABC', repeat=2))
+[('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'B'), ('B', 'C'), ('C', 'A'), ('C', 'B'), ('C', 'C')]
+
+>>> list(itertools.product('01', repeat=3))
+[('0', '0', '0'), ('0', '0', '1'), ('0', '1', '0'), ('0', '1', '1'), ('1', '0', '0'), ('1', '0', '1'), ('1', '1', '0'), ('1', '1', '1')]
+
+---
+
+map(function, iterable, ...)
+
+Apply function to every item of iterable and return a list of the results. If additional iterable arguments are passed, function must take that many arguments and is applied to the items from all iterables in parallel. (Built in function)
+
 
