@@ -26,6 +26,7 @@ Each house is painted a different color, and their inhabitants are of different 
 """
 
 import itertools
+import time
 
 houses = [1, 2, 3, 4, 5]
 orderings = list(itertools.permutations(houses))
@@ -66,3 +67,12 @@ def zebra_puzzle():
 
 WATER, ZEBRA = zebra_puzzle()
 print WATER, ZEBRA
+
+def t():
+    "Returns no. of seconds to execute zebra_puzzle()."
+    t0 = time.clock()
+    zebra_puzzle()
+    t1 = time.clock()
+    return t1-t0
+
+print t()
