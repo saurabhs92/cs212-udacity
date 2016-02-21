@@ -76,8 +76,14 @@ def timecall(fn, *args):
     return t1-t0, result
 
 def timedcalls(n, fn, *args):
-    "Call function n times with args and return min, avg and max times."
-    times = [timecall(fn, *args)[0] for _ in range(n)]
+    """Call fn(*args) repeatedly: n times if n is an int; 
+    or upto n seconds if n is a float; return min, avg and max times."""
+    if isinstance(n, int):
+        times = [timecall(fn, *args)[0] for _ in range(n)]
+    else:
+        times = []
+        while(sum(times) < n):
+            times.append(timecall(fn, *args)[0])
     return min(times), average(times), max(times)
 
 def average(numbers):
@@ -87,3 +93,4 @@ def average(numbers):
 
 print timecall(zebra_puzzle)
 print timedcalls(100, zebra_puzzle)
+print timedcalls(10.0, zebra_puzzle)
