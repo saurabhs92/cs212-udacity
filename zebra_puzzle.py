@@ -68,11 +68,11 @@ def zebra_puzzle():
 WATER, ZEBRA = zebra_puzzle()
 print WATER, ZEBRA
 
-def t():
-    "Returns no. of seconds to execute zebra_puzzle()."
+def timecall(fn):
+    "Calculate the time to execute a function."
     t0 = time.clock()
-    zebra_puzzle()
+    fn()
     t1 = time.clock()
     return t1-t0
 
-print t()
+print timecall(zebra_puzzle)
