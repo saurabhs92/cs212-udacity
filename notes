@@ -133,4 +133,45 @@ map(function, iterable, ...)
 
 Apply function to every item of iterable and return a list of the results. If additional iterable arguments are passed, function must take that many arguments and is applied to the items from all iterables in parallel. (Built in function)
 
+---
 
+Generator functions:
+
+Similar to generator expression
+
+def ints(start, end):
+    i = start
+    while i<= end:
+    	  yield i
+	  i = i + 1
+
+To call the above fn:
+
+L = ints(0, 100000)
+L won't be a list right away. It will be a generator object.
+L = <generator>
+next(L) gives 0 as output.
+Normally this function will be used with a for:
+for i in L: ...	       
+
+Generator functions allow us to deal with infinite sequences.
+
+def ints(start, end=None):
+    i = start
+    while i <= end or end is None:
+    	  yield i
+	  i = i + 1
+
+ints(0) generates infinite sequence 0, 1, 2...
+
+# Define a function, all_ints(), that generates the 
+# integers in the order 0, +1, -1, +2, -2, ...
+
+def all_ints():
+    "Generate integers in the order 0, +1, -1, +2, -2, +3, -3, ..."
+    yield 0
+    i = 1
+    while True:
+        yield +i
+	yeild -i
+	i += 1
