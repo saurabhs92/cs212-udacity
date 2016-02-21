@@ -48,7 +48,7 @@ def zebra_puzzle():
                 if imright(green, ivory)       # 6
                 for (Englishman, Spaniard, Ukranian, Japanese, Norwegnian) in orderings 
                 if (Englishman is red)         # 2
-                if nextto(Norwegnian, blue)  #15
+                if nextto(Norwegnian, blue)    #15
                 if (Norwegnian is first)       #10
                 for (dog, snails, fox, horse, ZEBRA) in orderings
                 if (Spaniard is dog)           # 3
@@ -89,8 +89,23 @@ def timedcalls(n, fn, *args):
 def average(numbers):
     "Return arithmetic mean of a sequence of numbers."
     return sum(numbers) / float(len(numbers))
+"""
+def instrument_fn(fn, *args):
+    c.starts, c.items = 0, 0
+    result = fn(*args)
+    print '%s got %s with %5d iters over %7d items.' % (
+        fn.__name__, result, c.starts, c.items)
+# zebra_puzzle got (1, 5) with 25 iters over 2775 items.    
 
+def c(sequence):
+    "Generate items in sequence, keeping counts. c.starts, c.items are no. of seq started & items generated."
+    c.starts += 1
+    for item in sequence:
+        c.items += 1
+        yield item
+"""
 
 print timecall(zebra_puzzle)
 print timedcalls(100, zebra_puzzle)
 print timedcalls(10.0, zebra_puzzle)
+# instrument_fn(zebra_puzzle)
