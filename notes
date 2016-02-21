@@ -175,3 +175,22 @@ def all_ints():
         yield +i
 	yeild -i
 	i += 1
+
+---
+
+for loops:
+
+for loop internally creates an iterable object using iter(). 
+
+for x in items:
+    print x
+
+when the above code is run, the following code is actually implemented:
+     
+it = iter(items):
+try:
+     while True:
+     	   x = next(it)
+	   print x
+except StopIteration:
+     pass
