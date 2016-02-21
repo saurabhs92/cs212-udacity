@@ -65,14 +65,14 @@ def zebra_puzzle():
                 if (Japanese is Parliaments)   #14
                 )
 
-WATER, ZEBRA = zebra_puzzle()
-print WATER, ZEBRA
+# WATER, ZEBRA = zebra_puzzle()
+# print WATER, ZEBRA
 
-def timecall(fn):
+def timecall(fn, *args):
     "Calculate the time to execute a function."
     t0 = time.clock()
-    fn()
+    result = fn(*args)
     t1 = time.clock()
-    return t1-t0
+    return t1-t0, result
 
 print timecall(zebra_puzzle)
