@@ -24,6 +24,7 @@ We will try substituting letters with all combinations of digits and use eval to
 """
 
 import string, re
+import itertools
 
 def solve(formula):
     """Given a formula like 'ODD + ODD == EVEN', fill in digits to solve it.
@@ -34,13 +35,20 @@ def solve(formula):
 
 def fill_in(formula):
     "Generate all possible fillings-in of letters in formula with digits."
-    
-
-def valid(formula):
+    letters = ''.join(set(re.findall('[A-Z]', formula)))
+    for digits in itertools.permutations('1234567890', len(letters)):
+        table = string.maketrans(letters, ''.join(digits))
+        yield formula.translate(table)
+        
+def valid(f):
     "Formula is valid iff it has no leading zero, and evaluates to True."
     try:
         # ensure no number starts with 0
-        return not re.search(r'\b0[0-9]', formula) and eval(f) is True 
+        return not re.search(r'\b0[0-9]', f) and eval(f) is True 
     except ArithmeticError:    # Division-by-zero, overflows, etc.
         return False
 
+f = 'ODD + ODD == EVEN'
+s = solve(f)
+print f
+print s
