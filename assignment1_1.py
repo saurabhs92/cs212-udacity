@@ -1,7 +1,11 @@
 #!bin/python2.7
 
-# Homework Assigment 1 
-# Write the best_hand function which takes in a 7 card hand and returns the best 5 card hand. 
+"""
+CS212 Udacity Design of computer Programs 
+Module 1 - Homwork assignment 1 
+
+Write the best_hand function which takes in a 7 card hand and returns the best 5 card hand. 
+"""
 
 from poker import hand_rank
 import itertools
@@ -19,4 +23,5 @@ def test_best_hand():
            == ['7C', '7D', '7H', '7S', 'TD']) 
     return 'test_best_hand passes'
 
-print test_best_hand()
+if __name__ == '__main__':
+    print test_best_hand()
