@@ -105,7 +105,8 @@ def c(sequence):
         yield item
 """
 
-print timecall(zebra_puzzle)
-print timedcalls(100, zebra_puzzle)
-print timedcalls(10.0, zebra_puzzle)
-# instrument_fn(zebra_puzzle)
+if __name__ == '__main__':
+    print timecall(zebra_puzzle)
+    print timedcalls(100, zebra_puzzle)
+    print timedcalls(10.0, zebra_puzzle)
+    # instrument_fn(zebra_puzzle)
