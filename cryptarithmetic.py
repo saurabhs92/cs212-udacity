@@ -25,10 +25,22 @@ We will try substituting letters with all combinations of digits and use eval to
 
 import string, re
 
+def solve(formula):
+    """Given a formula like 'ODD + ODD == EVEN', fill in digits to solve it.
+    Input formula is a string. Output formula is a digit-filled-in string or None."""
+    for f in fill_in(formula):
+        if valid(f):
+            return f
+
+def fill_in(formula):
+    "Generate all possible fillings-in of letters in formula with digits."
+    
+
 def valid(formula):
     "Formula is valid iff it has no leading zero, and evaluates to True."
     try:
-        return not re.search(r'\b0[0-9]', formula) and eval(f) is True
-    except ArithmeticError:
+        # ensure no number starts with 0
+        return not re.search(r'\b0[0-9]', formula) and eval(f) is True 
+    except ArithmeticError:    # Division-by-zero, overflows, etc.
         return False
 
