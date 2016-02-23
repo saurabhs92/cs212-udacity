@@ -194,3 +194,24 @@ try:
 	   print x
 except StopIteration:
      pass
+
+---
+
+Use ''.join(a) to make a string from a tupple or a list.
+
+---
+
+When a list is to be returned, check if returning a generator object makes sense: When you don't have to necessarily iterate over the whole list and you might get lucky after a few iterations, making a generator function is the correct thing.
+Example: In module 2, fill_in() we said yield in a for loop instead of returning a list:
+
+def fill_in(formula):
+    "Generate all possible fillings-in of letters in formula with digits."
+    letters = ''.join(set(re.findall('[A-Z]', formula)))
+    for digits in itertools.permutations('1234567890', len(letters)):
+        table = string.maketrans(letters, ''.join(digits))
+        yield formula.translate(table)
+
+This is because we might have gotten our valid formula before the complete iteration.
+
+ 
+
