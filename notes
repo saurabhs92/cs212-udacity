@@ -201,7 +201,12 @@ Use ''.join(a) to make a string from a tupple or list of strings or from another
 
 If a tupple of ints is to converted to a single string use ''.join(map(str, <tupple>))
 
-eg. ', '.join('AEIOU') => 'A, E, I, O, U' 
+Use join() to insert a character between letters of a string:
+', '.join('AEIOU') => 'A, E, I, O, U' 
+
+Use a for loop inside join() to create a list from another list:
+firstletters = ['Y', 'M']
+' and '.join(L + '!=0' for L in firstletters) => 'Y!=0 and M!=0'  
 
 ---
 
@@ -249,3 +254,20 @@ str_to_split = 'YOU==ME**2'
 list1 = re.split('([A-Z]+)', str_to_split) # ['YOU', '==', 'ME', '**2']
 list2 = re.split('[A-Z]+'  , str_to_split) # ['==', '**2']
 
+---
+
+eval is a time consuming function: first creates a parse tree of the expression and then loads and solves the expressions.
+Whenever possible, reduce the number of calls to eval. Specially if eval is bieng called inside a for loop: create a string of a simplified expression that was otherwise bieng evaluated inside a loop, evaluate it and return the compiled version: 
+
+# Inside compile_formula():
+f = 'lambda Y, O, U, M, E: Y!=0 and M!=0 and ((U+10*O+100*Y) == (E+10*M)**2))'
+return eval(f)
+
+# Inside faster_solve()
+f = compile_formula(formula)
+for digits in ...:
+    if f(*digits) is True:
+       ...
+       return formula.translate(table)
+
+------
