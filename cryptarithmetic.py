@@ -27,6 +27,8 @@ from __future__ import division
 from zebra_puzzle import timecall
 import string, re, itertools, time, cProfile
 
+# Method 1
+
 def solve(formula):
     """Given a formula like 'ODD + ODD == EVEN', fill in digits to solve it.
     Input formula is a string. Output formula is a digit-filled-in string or None."""
@@ -48,6 +50,33 @@ def valid(f):
         return not re.search(r'\b0[0-9]', f) and eval(f) is True 
     except ArithmeticError:    # Division-by-zero, overflows, etc.
         return False
+
+# Method 2 (faster, better, compiles each formula only once so that eval - the most time consuming function - is called only once per formula.)
+
+def faster_solve(formula):
+    """Given a formula like 'ODD + ODD == EVEN', fill in digits to solve it.
+    Input formula is a string. Output formula is a digit-filled-in string or None.
+    This version precompiles the formula; only one eval per formula."""
+    f, letters = compile_formula(formula)
+    for digits in itertools.permutations((1,2,3,4,5,6,7,8,9,0), len(letters)):
+        try:
+            if f(*digits) is True:
+                table = string.maketrans(letters, ''.join(map(str, digits)))
+                return formula.translate(table)
+        except ArithmeticError:
+            pass
+
+def compile_formula(formula, verbose=False):
+    """Compile formula into a function. Also returns letters found, as a str, 
+    in same order as parms of function. For example, 'YOU == ME**2' returns
+    (lambda Y, O, U, M, E: (U+10*O+100*Y) == (E+10*M)**2), 'YMEOU' """
+    letters = ''.join(set(re.findall('[A-Z]', formula)))
+    parms = ', '.join(letters)
+    tokens = map(compile_word, re.split('([A-Z]+)', formula))
+    body = ''.join(tokens)
+    f = 'lambda %s: %s' % (parms, body)
+    if verbose: print f
+    return eval(f), letters
 
 def compile_word(word):
     """Complle a word of uppercase letters as digits.
@@ -79,6 +108,7 @@ def test():
     for example in examples:
         print; print 13*' ', example
         print '%6.4f sec :  %s' % timecall(solve, example)
+        print '%6.4f sec :  %s' % timecall(faster_solve, example)
     print '%6.4f tot.' % (time.clock() - t0)
 
 cProfile.run('test()')
