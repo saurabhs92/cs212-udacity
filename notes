@@ -197,9 +197,11 @@ except StopIteration:
 
 ---
 
-Use ''.join(a) to make a string from a tupple or list of strings.
+Use ''.join(a) to make a string from a tupple or list of strings or from another string.
 
 If a tupple of ints is to converted to a single string use ''.join(map(str, <tupple>))
+
+eg. ', '.join('AEIOU') => 'A, E, I, O, U' 
 
 ---
 
@@ -229,6 +231,21 @@ From inside the script, add the following to the code:
 import cProfile
 cProfile.run('test()') # where the timing data for test() is required.
 
+---
 
+Handling types "polymorphism"
 
+To check type of a variable use isinstance():
+if(isinstance(n, int)):
+	...
+else:
+	...
+
+---
+
+Use brackets inside re.split() to include the chars of split.
+
+str_to_split = 'YOU==ME**2'
+list1 = re.split('([A-Z]+)', str_to_split) # ['YOU', '==', 'ME', '**2']
+list2 = re.split('[A-Z]+'  , str_to_split) # ['==', '**2']
 
