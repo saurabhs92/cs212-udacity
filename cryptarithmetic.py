@@ -51,7 +51,7 @@ def valid(f):
     except ArithmeticError:    # Division-by-zero, overflows, etc.
         return False
 
-# Method 2 (faster, better, compiles each formula only once so that eval - the most time consuming function - is called only once per formula.)
+# Method 2 (faster: ~20x compared to method 1, better, compiles each formula only once so that eval - the most time consuming function - is called only once per formula.)
 
 def faster_solve(formula):
     """Given a formula like 'ODD + ODD == EVEN', fill in digits to solve it.
@@ -71,9 +71,13 @@ def compile_formula(formula, verbose=False):
     in same order as parms of function. For example, 'YOU == ME**2' returns
     (lambda Y, O, U, M, E: (U+10*O+100*Y) == (E+10*M)**2), 'YMEOU' """
     letters = ''.join(set(re.findall('[A-Z]', formula)))
+    firstletters = re.findall(r'\b([A-Z])[A-Z]', formula)
     parms = ', '.join(letters)
     tokens = map(compile_word, re.split('([A-Z]+)', formula))
     body = ''.join(tokens)
+    if firstletters:
+        tests = ' and '.join(L + '!=0' for L in firstletters)
+        body = '%s and (%s)' % (tests, body)
     f = 'lambda %s: %s' % (parms, body)
     if verbose: print f
     return eval(f), letters
