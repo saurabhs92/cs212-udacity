@@ -270,4 +270,14 @@ for digits in ...:
        ...
        return formula.translate(table)
 
+---
+
+We can assign a long function name to a short variable inside a function if it is to be called multiple times:
+def test():
+    L = longest_subpalindrome_slice
+    assert L('racecar')  == (0, 7)
+    assert L('Racecar')  == (0, 7)
+    assert L('RacecarX') == (0, 7)
+    ...
+
 ------
