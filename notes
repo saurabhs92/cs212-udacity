@@ -197,7 +197,9 @@ except StopIteration:
 
 ---
 
-Use ''.join(a) to make a string from a tupple or a list.
+Use ''.join(a) to make a string from a tupple or list of strings.
+
+If a tupple of ints is to converted to a single string use ''.join(map(str, <tupple>))
 
 ---
 
@@ -213,5 +215,20 @@ def fill_in(formula):
 
 This is because we might have gotten our valid formula before the complete iteration.
 
- 
+---
+
+To find out time taken in a file by each function, no. of calls, time per call, etc., use the module cProfile:
+
+From the terminal run:
+python -m cProfile <file_to_test>.py 
+
+OR
+
+From inside the script, add the following to the code:
+
+import cProfile
+cProfile.run('test()') # where the timing data for test() is required.
+
+
+
 
