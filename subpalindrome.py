@@ -9,10 +9,31 @@
 # palindrome in the string. 
 #
 # Please do not use regular expressions to solve this quiz!
-
+# 0123k56789
 def longest_subpalindrome_slice(text):
     "Return (i, j) such that text[i:j] is the longest palindrome in text."
-    
+    text = text.lower()
+    spaces = text.count(' ') 
+    spaces += 1
+    print spaces
+    size = len(text)
+    print size 
+    i, j = 0, 0
+    start, stop = 0, 0
+    for k in range(size):
+        n = 1
+        print 'k = ' + str(k)
+        while (k-n>=0 and k+n<=size):
+            print '  n = ' + str(n)
+            string = text[k-n:k+n+1]
+            print '  ' + string
+            if (string == string[::-1]): 
+                start, stop = k-n, k+n
+                print '  ' + str(start) + ' ' + str(stop)
+            n += 1
+        if ((stop - start) > (j - i)): i, j = start, stop
+    return i, j + 1
+        
 
 def test():
     L = longest_subpalindrome_slice
@@ -27,3 +48,5 @@ def test():
     return 'tests pass'
 
 print test()
+print longest_subpalindrome_slice('racecar')
+print longest_subpalindrome_slice('Race carr')
