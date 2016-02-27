@@ -280,4 +280,18 @@ def test():
     assert L('RacecarX') == (0, 7)
     ...
 
+---
+
+Small functions can be written inside another function.
+
+Example:
+
+def longest_subpalindrome_slice(text):
+    "Return (i, j) such that text[i:j] is the longest palindrome in text."
+    if text == '': return (0, 0)
+    def length(slice): a,b = slice; return b-a
+    ...
+
+This function length can only be called from within this function only. 
+ 
 ------
