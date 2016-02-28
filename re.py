@@ -10,6 +10,10 @@ Regular Expressions
 
 def search(pattern, text):
     "Return True if pattern appears anywhere in text."
+    if pattern.startswith('^'): 
+        return match(pattern[1:], text)
+    else:
+        return match('.*' + pattern, text)
 
 def match(pattern, text):
     "Return True if pattern appears at the start of the text."
