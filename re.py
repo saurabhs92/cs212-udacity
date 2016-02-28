@@ -19,3 +19,21 @@ def test():
     assert search('baa*!', 'Sheep said baaaa humbug') == False
     assert match('baa*!', 'Sheep said baaaa!') == False
     assert match('baa*!', 'baaaaaaaa! said the sheep')
+    assert search('def', 'abcdefg') 
+    assert search('def$', 'abcdef') 
+    assert search('def$', 'abcdefg') == False
+    assert search('^start', 'not the start') == False
+    assert match('start', 'not the start') == False
+    assert match('a*b*c*', 'just anything') 
+    assert match('x?', 'text') 
+    assert match('text?', 'text')
+    assert match('text?', 'text')
+    def words(text): return words.split()
+    assert all(match('aa*bb*cc*$', s) for s in words('abc aabbcc aaabcccc'))
+    assert not any(match('aa*bb*cc*$', s) for s in words('abc aabbcc aaabcccc'))
+    assert all(match('^ab.*aca.*a$', s) for s in words('abracadabra abacaa about-acacia-fa'))
+    assert all(match('t.p', s) for s in words('tip top tap atypical tepid stop'))
+    assert not any(match('t.p', s) for s in words('TYPE teepee tp'))
+    return 'test passes'
+
+
