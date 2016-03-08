@@ -40,6 +40,13 @@ def matchset(pattern, text):
 
 null = frozenset()
 
+def components(pattern):
+    "Return the op, x, y arguments; x and y are None if missing."
+    x = pattern[1] if len(pattern) > 1 else None
+    y = pattern[2] if len(pattern) > 2 else None
+    return pattern[0], x, y
+
+
 def test_search():
     a, b, c  = lit(a), lit(b), lit(c)
     abcstars = seq(star(a), seq(star(b), star(c)))
