@@ -8,6 +8,15 @@ Regular Expressions - APIs
 
 """
 
+def lit(x):       return ('lit', x)
+def seq(x, y):    return ('seq', x, y)
+def alt(x, y):    return ('alt', x, y)
+def star(x):      return ('star', x)
+def plus(x):      return (seq(x, star(x)))
+def oneof(chars): return ('oneof', chars)
+dot = ('dot',)
+eol = ('eol',) 
+
 def matchset(pattern, text):
     "Match pattern at start of text; return a set of remainders of text."
     op, x, y = components(pattern)
