@@ -310,5 +310,10 @@ aaab,  aab, ab, b
 Then for each of the above match with b+:
 b matches successfully, giving aaab as the result
 
+matchset(pattern, text) => set of all remainders
+returns set of all possible remainders when pattern is matched against text.
+If no match exists empty set is returned.
+
+matchset('a*', aaab) => ['aaab', 'aab', 'ab', 'b']
  
 ------
