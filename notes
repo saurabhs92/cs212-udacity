@@ -293,5 +293,22 @@ def longest_subpalindrome_slice(text):
     ...
 
 This function length can only be called from within this function only. 
+
+---
+
+To implement regular expression as an API, we need to understand the following concepts: 
+Partial Results
+Control over iteration
+
+e.g. If pattern is a*b+ and string is 'aaab' then
+     we we need to check for b+ in all of the possible results of a* i.e. a, aa, aaa
+     i.e. we need to have control over iteration
+
+To do that it is best to first obtain a list of possible remainders after each match.
+To match a*b+ first obtain remainders with the match a*:
+aaab,  aab, ab, b
+Then for each of the above match with b+:
+b matches successfully, giving aaab as the result
+
  
 ------
