@@ -40,6 +40,20 @@ def matchset(pattern, text):
 
 null = frozenset()
 
+def search(pattern, text):
+    "March pattern anywhere in text; return longest earliest match or None."
+    for i in range(len(text)):
+        m = match(pattern, text[i:])
+        if m is not None:
+            return m
+
+def match(pattern, text):
+    "Match pattern against start of text; return longest match found or None."
+    remainders = matchset(pattern, text)
+    if remainders:
+        shortest = min(remainders, key=len)
+        return text[:len(text)-len(shortest)]
+
 def components(pattern):
     "Return the op, x, y arguments; x and y are None if missing."
     x = pattern[1] if len(pattern) > 1 else None
