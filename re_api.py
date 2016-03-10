@@ -34,7 +34,7 @@ def matchset(pattern, text):
         return set(['']) if text == '' else null
     elif 'star' == op:
         return set([text]) | set(t2 for t1 in matchset(x, text) 
-                                 for t2 in matchset(pattern, text) if t1 != text)
+                                 for t2 in matchset(pattern, t1) if t1 != text)
     else:
         raise ValueError('unknown pattern: %s' % pattern)
 
@@ -62,7 +62,7 @@ def components(pattern):
 
 
 def test_search():
-    a, b, c  = lit(a), lit(b), lit(c)
+    a, b, c  = lit('a'), lit('b'), lit('c')
     abcstars = seq(star(a), seq(star(b), star(c)))
     dotstar  = star(dot)
     assert search(lit('def'), 'abcdef') == 'def'
@@ -74,9 +74,13 @@ def test_search():
     assert all(match(seq(abcstars, eol), s) == s for s in 'abc aaabbccc aaaabcccccc'.split())
     assert all(match(seq(abcstars, eol), s) == None for s in 'cab aaabbcccd aaaa-b-cccccc'.split())
     r = seq(lit('ab'), seq(dotstar, seq(lit('aca'), seq(dotstar, seq(a, eol)))))
-    assert all(search(r, s) is not None for s in 'abracadabra abaca about-acacia-flora'.split())
-    assert all(match(seq(c, seq(dot, b)), s) is not None for s in 'cab cob carob cb carbuncle'.split())
-    assert not any(match(seq(c, seq(dot, b)), s) for s in 'crab cb across scab'.split())
+    assert all(search(r, s) is not None 
+               for s in 'abracadabra abacaa about-acacia-flora'.split())
+    assert all(match(seq(c, seq(dot, b)), s) is not None 
+               for s in 'cab cob cabrob ccb cabrbuncle'.split())
+    assert not any(match(seq(c, seq(dot, b)), s) 
+                   for s in 'crab cb across scab'.split())
     return 'test_search passes.'
 
-
+if __name__ == '__main__':
+    test_search()
