@@ -315,5 +315,51 @@ returns set of all possible remainders when pattern is matched against text.
 If no match exists empty set is returned.
 
 matchset('a*', aaab) => ['aaab', 'aab', 'ab', 'b']
- 
+
+---
+
+Interpretter vs. Compiler
+
+Interpretter: 1 step : matchset(pattern, text) => not efficient if same pattern is to be used multiple times.
+Compiler    : 2 steps: compile(pattern)  => returns c as compiled object of pattern, now apply to any text as c(text)
+
+Example of implementation:
+Interpretter:
+
+def matchset(pattern, text):
+    "Match pattern at start of text; return a set of remainders of text."
+    op, x, y = components(pattern)
+    if 'lit' == op:
+        return set([text[len(x):]]) if text.startswith(x) else null
+
+def lit(s): return ('lit', x)
+
+Example: 
+>>> matchset(pat2, 'aaab')
+
+
+Compiler:
+
+def lit(s): return lambda text: set([text[len(x):]]) if text.startswith(x) else null
+
+Compiled form can be of several types:
+
+1. Python functions as above,
+2. Actual machine instructions 
+3. Machine instructions of a VM, portable across different computers(Java, Python)
+
+Examples:
+>>> pat = lit('a')
+>>> pat
+      <function <lambda> at 0x170b32>
+>>> pat('a string')
+      set([' string'])
+>>>
+>>> pat2 = plus(pat)
+>>> pat2
+      <function <lambda> at 0x180b65>
+>>> pat2('aaab')
+      set(['b', 'ab', 'aab', 'aaab'])
+
+
 ------
