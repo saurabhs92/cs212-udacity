@@ -4,7 +4,7 @@
 
 CS212 Udacity Design of computer Programs 
 Module 3 - Problem 2 
-Regular Expressions - APIs
+Regular Expressions APIs - Interpretter Implementation
 
 """
 
@@ -83,4 +83,4 @@ def test_search():
     return 'test_search passes.'
 
 if __name__ == '__main__':
-    test_search()
+    print test_search()
