@@ -361,5 +361,26 @@ Examples:
 >>> pat2('aaab')
       set(['b', 'ab', 'aab', 'aaab'])
 
+---
+
+Recognizer
+
+match(pattern, text) => txt | None
+
+Called a recognizer because we are recognizing whether a prefix of text is in the language defined by pattern. 
+
+Generator
+
+gen(pattern) -=> Language L defined by pattern
+
+Eg: 
+(a|b)(a|b) => {aa, ab, ba, bb}
+
+a*         => {'', a, aa, aaa, ....}
+To make a finite set pass a set of numbers Ns, to limit the lengths of matched patterns, i.e:
+pat( {1,2,3} ) => {a, aa, aaa}
+
+Hence we want to find set of all possible patterns (with lengths in Ns) without giving the text
+
 
 ------
