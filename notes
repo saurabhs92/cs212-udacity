@@ -382,5 +382,33 @@ pat( {1,2,3} ) => {a, aa, aaa}
 
 Hence we want to find set of all possible patterns (with lengths in Ns) without giving the text
 
+---
+
+map fn can be applied to strings:
+
+a, b, c = lit('a'), lit('b'), lit('c') 
+can be written as
+a, b, c = map(lit, 'abc')
+
+---
+
+To extend a binary function to an n_ary function use decorators:
+
+If f is a binary function
+f2 = n_ary(f) so that 
+f2(a,b,c) = f(a, f(b,c))
+
+where n_ary is a function (decorator) we have defined which takes a binary function and returns an n_ary fn.
+
+we can now simply say 
+f = n_ary(f)
+This extends the functionality of f to take multiple arguments. We did not have to change the definition of f. Had there been multiple functions like f which needed extension to n_ary args like sequence, alternate, add, mul, etc, we would have to change each one of those.
+
+This technique of extension of function's functionality is so common that there is a shortcut for this in Python. Write @<ecorator_name> before defining the function:
+
+@n_ary 
+def seq(x, y):
+    ...
+
 
 ------
