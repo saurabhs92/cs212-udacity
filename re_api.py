@@ -8,8 +8,19 @@ Regular Expressions APIs - Interpretter Implementation
 
 """
 
+def n_ary(f):
+    """Given binary function f(x,y), return an n_ary function such that
+    f(x,y,z) = f(x, f(y,z)), etc. Also allow f(x)=x"""
+    def n_ary_f(x, *args):
+        return x if not args else f(x, n_ary_f(*args))
+    return n_ary_f
+
 def lit(x):       return ('lit', x)
+
+@n_ary
 def seq(x, y):    return ('seq', x, y)
+
+@n_ary
 def alt(x, y):    return ('alt', x, y)
 def star(x):      return ('star', x)
 def plus(x):      return (seq(x, star(x)))
@@ -59,7 +70,6 @@ def components(pattern):
     x = pattern[1] if len(pattern) > 1 else None
     y = pattern[2] if len(pattern) > 2 else None
     return pattern[0], x, y
-
 
 def test_search():
     a, b, c  = lit('a'), lit('b'), lit('c')
