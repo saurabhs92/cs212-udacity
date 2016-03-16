@@ -418,4 +418,28 @@ def n_ary(f):
         return x if not args else f(x, n_ary_f(*args))
     return n_ary_f
 
+---
+
+*args and **kwargs
+
+def f(x, *args):
+     print x
+     for count, arg in enumerate(args):
+             print count, arg
+
+Output of f('a','b','c')
+a
+0 b
+1 c
+
+
+def bar(**kwargs):
+     for a in kwargs:
+         print a, kwargs[a]
+         
+
+Output of bar(name='one', age=27)
+age 27
+name one
+
 ------
