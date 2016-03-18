@@ -464,4 +464,17 @@ def decorator(d):
         return update_wrapper(d(fn), d)
     return update_wrapper(_d, d)
 
+---
+
+y = [1,2,3]
+d = {}
+if y in d -> ..
+If you try to look up a list in a dictionary(hash table) you will get a type error:
+TypeError: unhashable type : list
+
+That is because lists are mutable, i.e. you can change the value of any list item. Then the hash value for that list will change at the time of retrival from when it was stored. 
+Some languages do allow lists to be put into a hash table. 
+
 ------
+
+
