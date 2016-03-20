@@ -48,6 +48,7 @@ callcounts = {}
 @memo
 def fib(n): return 1 if n <= 1 else fib(n-1) + fib(n-2)
 
+@decorator
 def trace(f):
     indent = '   '
     def _f(*args):
@@ -62,6 +63,9 @@ def trace(f):
             return result
     trace.level = 0
     return _f
+
+def disabled(f): return f
+    
 
 a = fib(5)
 print a 
