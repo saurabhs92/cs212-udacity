@@ -14,9 +14,10 @@ def split(text, sep=None, maxsplit=-1):
     return [t.strip() for t in text.strip().split(sep, maxsplit) if t]
 
 
-def grammar(description):
+def grammar(description, whitespace=r'\s*'):
     """Convert a description to a grammar."""
-    G = {}
+    G = {' ': whitespace}
+    description = description.replace('\t', ' ') # no tabs
     for line in split(description, '\n'):
         lhs, rhs = split(line, '=>', 1)
         alternatives = split(rhs, ' | ')
