@@ -9,6 +9,11 @@ Defining Grammar for a language
 """
 
 
+def split(text, sep=None, maxsplit=-1):
+    "Like str.split applied to text, but strips whitespace from each peace."
+    return [t.strip() for t in text.strip().split(sep, maxsplit) if t]
+
+
 def grammar(description):
     """Convert a description to a grammar."""
     G = {}
@@ -17,6 +22,7 @@ def grammar(description):
         alternatives = split(rhs, ' | ')
         G[lhs] = tuple(map(split, alternatives))
     return G
+
 
 G = grammar(r"""
 Exp => Term [+-] Exp | Term
@@ -28,4 +34,9 @@ Var => [a-zA-Z]\w*
 Num => [-+]?[0-9]+([.][0-9]*)?
 """)
 
+def print_dict(dict):
+    for (k, v) in dict.items():
+        print k 
+        print v
 
+print_dict(G)
